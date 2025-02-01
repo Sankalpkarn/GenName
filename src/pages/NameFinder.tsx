@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Globe2, Calendar, Church, Loader2, Baby,ArrowLeft, Smile } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { useNavigate } from 'react-router-dom';
+import { Analytics } from "@vercel/analytics/react"
 
 interface FormData {
   location: string;
@@ -40,7 +41,7 @@ function NameFinder() {
       const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
       // Creating the prompt based on user inputs
-      const prompt = `Generate a baby name based on:
+      const prompt = `Without Any Formatting Generate 5 baby name with there meanings based on:
         Location: ${formData.location}
         Year: ${formData.year}
         Gender: ${formData.gender}
@@ -67,8 +68,9 @@ function NameFinder() {
       setIsLoading(false); // Stop loading state
     }
   };
-
+    <Analytics/>
   return (
+    
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-100">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
@@ -104,7 +106,7 @@ function NameFinder() {
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="Enter location (e.g., France, Japan)"
+                    placeholder="Enter location (e.g., India, Russia)"
                     required
                   />
                 </div>
